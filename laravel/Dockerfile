@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:xenial
 
 MAINTAINER Valentin Prugnaud <valentin@whatdafox.com>
 
@@ -14,9 +14,9 @@ RUN apt-get update \
     && apt-get install -y nginx curl zip unzip git software-properties-common supervisor sqlite3 \
     && add-apt-repository -y ppa:ondrej/php \
     && apt-get update \
-    && apt-get install -y php7.2-fpm php7.2-cli php7.2-gd php7.2-mysql \
-       php7.2-pgsql php7.2-imap php-memcached php7.2-mbstring php7.2-xml php7.2-curl \
-       php7.2-sqlite3 php7.2-xdebug php7.2-bcmath \
+    && apt-get install -y php7.3-fpm php7.3-cli php7.3-gd php7.3-mysql \
+       php7.3-pgsql php7.3-imap php-memcached php7.3-mbstring php7.3-xml php7.3-curl \
+       php7.3-sqlite3 php7.3-xdebug php7.3-bcmath \
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && mkdir /run/php \
     && apt-get remove -y --purge software-properties-common \
@@ -30,7 +30,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 
 COPY default.conf /etc/nginx/sites-available/default
 
-COPY php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
+COPY php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
 
 EXPOSE 80
 
